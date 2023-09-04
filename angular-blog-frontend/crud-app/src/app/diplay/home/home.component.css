@@ -10,7 +10,7 @@
   height: 100%;
   position: absolute;
   left: 80px;
-  max-width: 400px;
+  /* max-width: 400px; */
   grid-column: 2/3;
   display: flex;
   gap: 20px;
@@ -85,7 +85,7 @@ button:hover {
   position: fixed;
   right: 0;
   bottom: 0;
-  min-width: 100%;
+  /* min-width: 100%; */
   min-height: 100%;
 }
 
@@ -95,7 +95,7 @@ button:hover {
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   color: #f1f1f1;
-  width: 100%;
+/* width: 100%; */
   padding: 20px;
 }
 
@@ -158,7 +158,7 @@ button:hover {
     } */
 }
 
-
+/* 
 .starsection{
   position: absolute;
   top: 0;
@@ -294,20 +294,8 @@ button:hover {
   left:initial;
   animation-delay:2.75s ;
   animation-duration: 2.25s;
-}
+} */
 
-/*
-
-Tutorial:
-https://www.roboleary.net/animation/2022/10/31/how-to-make-a-slick-animation-schitts-creek-title-sequence.html
-
-Part of Title Sequences collection:
-https://codepen.io/collection/nNmwgP
-
-Source code:
-https://github.com/robole/title-sequences
-
-*/
 
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600");
 
@@ -401,7 +389,7 @@ p {
 }
 
 /* bars */
-.superscript::before {
+/* .superscript::before {
   --bar-width: 25%;
 
   position: absolute;
@@ -423,10 +411,10 @@ p {
   content: "";
 
   transform: scaleY(var(--bar-scale-y));
-}
+} */
 
 /* sparkle */
-.superscript::after {
+/* .superscript::after {
   --size: 10rem;
 
   position: absolute;
@@ -478,7 +466,7 @@ p {
   filter: blur(1px);
 
   transform: scale(0);
-}
+} */
 
 @media screen and (max-width: 600px) {
   p {

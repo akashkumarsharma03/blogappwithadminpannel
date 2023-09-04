@@ -2,12 +2,13 @@
   <div class="card bg-secondary">
     <div id="listContainer" class="bg-secondary">
       <ul id="myList" class="list-group bg-secondary" *ngFor="let data of categoryWiseData">
+        <!-- {{data | json}} -->
         <li class="list-group-item m-1" (click)="toggleDiv(data)" style="background: rgb(238,174,202); cursor: pointer;
             background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);">
           <h5 class="card-title"  style="font-weight: bolder;">{{data.categoryName}}</h5>
           <ul *ngIf="data.categoryName == currentCategory">
             <li *ngFor="let title of data.data">
-             <a  [routerLink]="['/blogpage/'+apidata._id]" >{{title}}</a> 
+             <a  [routerLink]="['/blogpage/'+title._id]">{{title.BlogTitle}}</a> 
             </li>
           </ul>
         </li>

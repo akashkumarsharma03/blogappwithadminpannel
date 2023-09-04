@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DiplayComponent } from '../diplay.component';
 import { ApiService } from '../../api.service';
+import { Router } from "@angular/router";
+
 
 
 
@@ -22,7 +24,10 @@ export class SavedComponent implements OnInit {
   val: boolean = true;
   listOfBlog :any={};
   currentCategory = '';
-  constructor(private ApiService: ApiService) {
+  blog='';
+  blogdata:any =[];
+  Blogid=""
+  constructor(private ApiService: ApiService , private router: Router) {
    
    }
 
@@ -32,7 +37,7 @@ export class SavedComponent implements OnInit {
       this.apidata = data;
       this.categoryList = [...new Set(data.map((item:any) => item.BlogCategory))];
       this.categoryList.forEach((category:any) => {
-        this.categoryWiseData.push({'categoryName' : category , 'data' : this.apidata.filter((t:any)=>t.BlogCategory == category).map((t:any) => t.BlogTitle)});
+        this.categoryWiseData.push({'categoryName' : category , 'data' : this.apidata.filter((t:any)=>t.BlogCategory == category)});
       });
       
     }, (error) => {
@@ -40,13 +45,11 @@ export class SavedComponent implements OnInit {
     })
    
   }
-
-
-
   toggleDiv(data:any){
     this.currentCategory = data.categoryName;
     console.log(data);
   }
+
 }
 
 

@@ -2,6 +2,8 @@ const express = require('express');
 const recordRoutes = express.Router();
 const dbo = require('./dbConnection');
 const mongoose = require('mongoose')
+const session = require('express-session');
+
 
 
 recordRoutes.route("/blogdata").get(async function (req, res) {
@@ -9,6 +11,21 @@ recordRoutes.route("/blogdata").get(async function (req, res) {
 
     dbConnect
         .collection("blogdata")
+        .find({}).limit(50)
+        .toArray(function (err, result) {
+            if (err) {
+                res.status(400).send("Error fetching listings!");
+            } else {
+                res.json(result);
+            }
+        });
+});
+
+recordRoutes.route("/services").get(async function (req, res) {
+    const dbConnect = dbo.getDb();
+
+    dbConnect
+        .collection("store")
         .find({}).limit(50)
         .toArray(function (err, result) {
             if (err) {
@@ -85,31 +102,25 @@ recordRoutes.route("/:id").delete( async (req, res) => {
     res.send(result).status(200);
 });
 
-//user google authentication
-recordRoutes.route("/googlelogin").post(async (req, res, next) => {
-    // let collection = await db.collection("blogdata");
-    // let newDocument = req.body;
-    // newDocument.date = new Date();
-    // let result = await collection.insertOne(newDocument);
-    // res.send(result).status(204);
+///authentication
+recordRoutes.route("/signin").post(async (req, res) => {
+    const dbConnect = dbo.getDb();
+    debugger;
+    let collection = await dbConnect.collection("users");
+    let newDocument = req.body;
+    newDocument.date = new Date();
+    let result = await collection.insertOne(newDocument);
+    res.send(result).status(204);
+});
 
-   User.findone({username:req.body.username},(err,user)=>{
-    if(err){
-        next(err);
-    }
-    if(!user){
-        var user = new User(req.body);
-        newUser.save((err, save)=>{
-            if(err){ 
-                next(err);
-            }else{
-                req.json({success:true, status:'user added sucessfully'})
-            }
-        })
-    }else{
-        req.json({success:true, status:'user retrived sucessfully'})
-    }
-   })
+recordRoutes.route("/:email").get(async function (req, res) {
+    const dbConnect = dbo.getDb();
+    let collection = await dbConnect.collection("users");
+    let query = { _id: mongoose.Types.ObjectId(req.params.id) };
+    let result = await collection.findOne(query);
+    if (!result) res.send("Not found").status(404);
+    else res.send(result).status(200);
+
 });
 
 module.exports = recordRoutes;

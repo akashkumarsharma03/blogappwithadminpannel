@@ -7,24 +7,48 @@
     </div>
     <div class="main"  style="height: 90vh; box-shadow: 1px 2px 1px 2px #3d3d3d49;;">
         <input type="checkbox" id="chk" aria-hidden="true">
+
+        <!-- signin -->
         <div class="signup" style="display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;">
-            <form>
+        align-items: center;" *ngIf="!check">
+            <form [formGroup]="userForm">
                 <label for="chk" aria-hidden="true">Sign up</label>
-                <input type="text" name="txt" placeholder="User name" required="">
-                <input type="email" name="email" placeholder="Email" required="">
-                <input type="password" name="pswd" placeholder="Password" required="">
-                <button>Sign up</button>
+                <input type="text" name="name" formControlName="name" placeholder="name" required="">
+                <input type="email" name="email" formControlName="email" placeholder="email" required="">
+                <input type="password" name="password" formControlName="password" placeholder="Password" required="">
+                <button (click)="setValue()">Sign up</button>
             </form>
         </div>
 
-        <div class="login">
+<!-- otp signin -->
+        <div class="signup" style="display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;" *ngIf="check">
+            <form [formGroup]="userForm">
+                <label for="chk" aria-hidden="true">OTP</label>
+                <input type="password" name="otp" formControlName="otp" placeholder="Enter mail otp" required="">
+                <button (click)="otp()">Submit</button>
+            </form>
+        </div>
+
+        <!-- login -->
+        <div class="login" *ngIf="!checklogin">
             <form>
                 <label for="chk" aria-hidden="true">Login</label>
                 <input type="email" name="email" placeholder="Email" required="">
                 <input type="password" name="pswd" placeholder="Password" required="">
+                <button>Login</button>
+            </form>
+        </div>
+
+         <!--otp login -->
+         <div class="login" *ngIf="checklogin">
+            <form>
+                <label for="chk" aria-hidden="true">OTP</label>
+                <input type="password" name="otplogin" placeholder="Enter mail otp"  required="">
                 <button>Login</button>
             </form>
         </div>
